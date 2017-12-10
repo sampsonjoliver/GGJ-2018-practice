@@ -4,6 +4,7 @@ import * as Phaser from 'phaser-ce';
 import { GameStore } from 'stores/GameStore';
 import { UiStore } from 'stores/ui';
 import { NodeView } from 'phaser/node';
+import { TransitView } from 'phaser/transit';
 import { KineticScroller } from 'phaser/kineticScroller';
 
 import * as Utils from 'utils';
@@ -14,6 +15,7 @@ export class PhaserStore {
   @observable.ref phaser: Phaser.Game = null;
 
   nodeViews: Map<string, NodeView> = new Map();
+  transitViews: Map<string, TransitView> = new Map();
 
   cameraTween: Phaser.Tween;
 
@@ -41,6 +43,8 @@ export class PhaserStore {
         for (const node of this.gameStore.nodes) {
           this.nodeViews.set(node.id, new NodeView(this, this.gameStore, this.uiStore, node.id));
         }
+
+        autorun(() => this.initialiseTransitViews());
 
         this.centreCamera();
       }
@@ -124,7 +128,9 @@ export class PhaserStore {
     };
 
     function preload() {
+      phaser.load.image('line', ASSET_PATH + 'line.png');
       phaser.load.image('planet', ASSET_PATH + 'planet.png');
+      phaser.load.image('circle', ASSET_PATH + 'circle.png');
     }
 
     function create() {
@@ -136,5 +142,23 @@ export class PhaserStore {
     }
 
     function update() {}
+  }
+
+  private initialiseTransitViews() {
+    this.transitViews.forEach((unitView: TransitView, transitId: string) => {
+      if (!this.gameStore.ongoingTransits.some(transit => transit.id === transitId)) {
+        this.transitViews.delete(unitView.modelId);
+        unitView.destroy();
+      }
+    });
+
+    if (this.gameStore.ongoingTransits) {
+      this.gameStore.ongoingTransits.forEach(transit => {
+        const transitView = this.transitViews.get(transit.id);
+        if (!transitView) {
+          this.transitViews.set(transit.id, new TransitView(this, this.gameStore, transit.id));
+        }
+      });
+    }
   }
 }

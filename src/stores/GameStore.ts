@@ -1,6 +1,6 @@
 import { firestore, mapDocToT } from 'service/firebase';
 import { observable, action } from 'mobx';
-import { Transit, Node, Game } from 'models';
+import { Player, Transit, Node, Game } from 'models';
 import { transaction } from 'mobx/lib/api/transaction';
 
 export enum GameSize {
@@ -25,6 +25,7 @@ export class GameStore {
 
   @observable game: Game = null;
   @observable nodes: Node[] = null;
+  @observable players: Player[] = null;
   @observable ongoingTransits: Transit[] = null;
   @observable transitRequests: Transit[] = null;
 
@@ -40,6 +41,10 @@ export class GameStore {
   watchGame() {
     this.gameRef.collection('nodes').onSnapshot(snapshot => {
       this.nodes = snapshot.docs.map(doc => mapDocToT<Node>(doc));
+    });
+
+    this.gameRef.collection('players').onSnapshot(snapshot => {
+      this.players = snapshot.docs.map(doc => mapDocToT<Player>(doc));
     });
 
     this.gameRef

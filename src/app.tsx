@@ -7,7 +7,7 @@ import { GameStore } from 'stores/GameStore';
 import { UiStore } from 'stores/ui';
 
 const stores = {
-  gameStore: new GameStore(),
+  gameStore: new GameStore('001'),
   phaserStore: new PhaserStore(),
   uiStore: new UiStore(),
 };
@@ -16,7 +16,7 @@ const stores = {
 
 stores.phaserStore.initialise(window, 'phaser-container', stores.gameStore, stores.uiStore);
 
-stores.gameStore.watchGame('001');
+stores.gameStore.watchGame();
 
 when(
   () => stores.phaserStore.phaser != null,

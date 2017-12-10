@@ -15,6 +15,11 @@ export type Node = ObjectWithId & {
   rate: number;
 };
 
+export type Player = ObjectWithId & {
+  name: string;
+  colour: string;
+};
+
 export type Transit = ObjectWithId & {
   playerId: string;
   numUnits: number;
