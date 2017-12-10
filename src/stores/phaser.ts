@@ -129,6 +129,7 @@ export class PhaserStore {
 
     function preload() {
       phaser.load.image('line', ASSET_PATH + 'line.png');
+      phaser.load.image('spaceship', ASSET_PATH + 'spaceship.png');
       phaser.load.image('planet', ASSET_PATH + 'planet.png');
       phaser.load.image('circle', ASSET_PATH + 'circle.png');
     }

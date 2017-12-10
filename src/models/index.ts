@@ -2,10 +2,8 @@ export type ObjectWithId = {
   id?: string;
 };
 
-export type Game = {
+export type Game = ObjectWithId & {
   tick: number;
-  nodes: Node[];
-  transits: Transit[];
 };
 
 export type Node = ObjectWithId & {
@@ -25,8 +23,8 @@ export type Transit = ObjectWithId & {
   numUnits: number;
   to: string;
   from: string;
-  departureTime: number | 'PENDING';
-  arrivalTime: number | 'PENDING';
+  departureTick: number;
+  arrivalTick: number;
   isPending: boolean;
   isResolved: boolean;
 };
