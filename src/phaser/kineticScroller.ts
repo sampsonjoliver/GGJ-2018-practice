@@ -1,5 +1,5 @@
-import * as Phaser from 'phaser-ce';
-import { PhaserStore } from 'stores/phaser';
+import * as Phaser from "phaser-ce";
+import { PhaserStore } from "stores/phaser";
 
 export class KineticScroller {
   sprite: Phaser.Image;
@@ -16,6 +16,7 @@ export class KineticScroller {
     this.sprite = phaserStore.phaser.add.image();
     this.sprite.width = phaserStore.phaser.world.width;
     this.sprite.height = phaserStore.phaser.world.height;
+    this.sprite.fixedToCamera = true;
     this.sprite.sendToBack();
 
     this.initialiseInputEvents();
