@@ -3,14 +3,13 @@ import * as ReactDOM from 'react-dom';
 import { injectGlobal } from 'styled-components';
 
 import { App } from './ui/App';
-import { Header } from './ui/components/Header';
 import { PhaserStore } from 'stores/phaser';
 import { GameStore } from 'stores/GameStore';
 import { UiStore } from 'stores/ui';
 
 injectGlobal`
-* { box-sizing: border-box; }
-body { margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin: 0; }
 `;
 
 const stores = {
@@ -25,6 +24,4 @@ stores.phaserStore.initialise(window, 'phaser-container', stores.gameStore, stor
 
 stores.gameStore.watchGame();
 
-// App
-ReactDOM.render(<App phaserStore={stores.phaserStore} />, document.getElementById('app'));
-ReactDOM.render(<Header />, document.getElementById('header'));
+ReactDOM.render(<App />, document.getElementById('react-container'));

@@ -1,11 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Provider, Toolbar } from 'rebass';
+import { Toolbar } from 'rebass';
 
-const Header: React.StatelessComponent<{}> = () => (
-  <Provider>
-    <Toolbar>Super secret sniper army base!</Toolbar>
-  </Provider>
-);
+const Header: React.StatelessComponent<{}> = () => <Toolbar>Super secret sniper army base!</Toolbar>;
 
 export { Header };
