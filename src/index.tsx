@@ -2,6 +2,8 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { injectGlobal } from 'styled-components';
 
+import registerServiceWorker from 'registerServiceWorker';
+
 import { App } from './ui/App';
 import { PhaserStore } from 'stores/phaser';
 import { GameStore } from 'stores/GameStore';
@@ -15,7 +17,7 @@ injectGlobal`
 const stores = {
   gameStore: new GameStore('001'),
   phaserStore: new PhaserStore(),
-  uiStore: new UiStore(),
+  uiStore: new UiStore()
 };
 
 (window as any).stores = stores;
@@ -25,3 +27,4 @@ stores.phaserStore.initialise(window, 'phaser-container', stores.gameStore, stor
 stores.gameStore.watchGame();
 
 ReactDOM.render(<App />, document.getElementById('react-container'));
+registerServiceWorker();
