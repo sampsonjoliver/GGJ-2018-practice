@@ -1,10 +1,17 @@
 import * as React from 'react';
-import * as ReactDom from 'react-dom';
-import { when } from 'mobx';
+import * as ReactDOM from 'react-dom';
+import { injectGlobal } from 'styled-components';
 
+import { App } from './ui/App';
+import { Header } from './ui/components/Header';
 import { PhaserStore } from 'stores/phaser';
 import { GameStore } from 'stores/GameStore';
 import { UiStore } from 'stores/ui';
+
+injectGlobal`
+* { box-sizing: border-box; }
+body { margin: 0; }
+`;
 
 const stores = {
   gameStore: new GameStore('001'),
@@ -18,9 +25,6 @@ stores.phaserStore.initialise(window, 'phaser-container', stores.gameStore, stor
 
 stores.gameStore.watchGame();
 
-when(
-  () => stores.phaserStore.phaser != null,
-  () => {
-    ReactDom.render(<p>Bruh.</p>, document.getElementById('react-container'));
-  }
-);
+// App
+ReactDOM.render(<App phaserStore={stores.phaserStore} />, document.getElementById('app'));
+ReactDOM.render(<Header />, document.getElementById('header'));
