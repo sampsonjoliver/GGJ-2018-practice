@@ -5,7 +5,7 @@ import { TickStore } from "stores/tick";
 
 const gameStore = new GameStore("001");
 const phaserStore = new PhaserStore();
-const uiStore = new UiStore(gameStore);
+const uiStore = new UiStore(gameStore, phaserStore);
 const tickStore = new TickStore(gameStore);
 
 export { gameStore, phaserStore, uiStore, tickStore };
