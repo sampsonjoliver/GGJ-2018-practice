@@ -24,7 +24,7 @@ const AppComponent: React.StatelessComponent<AppProps> = ({ children, ...props }
   return (
     <MuiThemeProvider theme={theme}>
       <Header />
-      {injected.uiStore.selectedNode && <PlanetDetails x={10} y={10} node={injected.uiStore.selectedNode} />}
+      {injected.uiStore.selectedNode && <PlanetDetails x={10} y={100} node={injected.uiStore.selectedNode} />}
     </MuiThemeProvider>
   );
 };

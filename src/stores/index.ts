@@ -4,6 +4,6 @@ import { UiStore } from 'stores/ui';
 
 const gameStore = new GameStore('001');
 const phaserStore = new PhaserStore();
-const uiStore = new UiStore(gameStore);
+const uiStore = new UiStore(gameStore, phaserStore);
 
 export { gameStore, phaserStore, uiStore };
