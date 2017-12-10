@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "bundle:client": "webpack --config webpack.config.js",
+    "bundle": "webpack --config webpack.config.js",
     "compile": "tsc",
-    "build:client": "yarn compile && yarn bundle:client",
+    "build": "yarn compile && yarn bundle",
     "build:clean": "rm -r build/*",
     "test": "yarn compile && NODE_PATH=\"$NODE_PATH:$PWD/build/es5\" mocha --recursive build/es5/**/*.test.js"
   },
@@ -18,7 +18,9 @@
   "homepage": "https://github.com/tomwwright/practice-jam#readme",
   "dependencies": {
     "async": "^2.4.1",
+    "dotenv-webpack": "^1.5.4",
     "emojis-list": "^2.0.1",
+    "firebase": "^4.8.0",
     "glob": "^7.1.1",
     "json-loader": "^0.5.4",
     "json5": "^0.5.0",

@@ -1,4 +1,8 @@
-export type Node = {
+export type ObjectWithId = {
+  id: string;
+};
+
+export type Node = ObjectWithId & {
   id: string;
   playerId: string;
   coordinates: { x: number; y: number };
@@ -6,7 +10,7 @@ export type Node = {
   rate: number;
 };
 
-export type Transit = {
+export type Transit = ObjectWithId & {
   id: string;
   playerId: string;
   numUnits: number;
