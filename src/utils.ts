@@ -1,0 +1,64 @@
+export function clone<T>(obj: T): T {
+  return JSON.parse(JSON.stringify(obj));
+}
+
+export function contains<T>(array: T[], thing: T): boolean {
+  return array.indexOf(thing) !== -1;
+}
+
+export function intersection<T>(...arrays: T[][]): T[] {
+  const compare = arrays[0] || [];
+  return compare.filter(item => arrays.every(array => array.indexOf(item) !== -1));
+}
+
+export function include<T>(array: T[], thing: T): T[] {
+  const copy = clone(array);
+  if (!contains(copy, thing)) copy.push(thing);
+  return copy;
+}
+
+export function exclude<T>(array: T[], thing: T): T[] {
+  const copy = [];
+  for (const a of array) {
+    if (a !== thing) copy.push(a);
+  }
+  return copy;
+}
+
+export function excludeAll<T>(array: T[], things: T[]): T[] {
+  const copy = [];
+  for (const a of array) {
+    if (!contains(things, a)) copy.push(a);
+  }
+  return copy;
+}
+
+export function flat<T>(arrays: (T | T[])[]): T[] {
+  const flattened: T[] = [];
+  const flatten = (elementOrArray: T | T[]) => {
+    if (Array.isArray(elementOrArray)) elementOrArray.forEach(e => flatten(e));
+    else flattened.push(elementOrArray);
+  };
+  arrays.forEach(elementOrArray => flatten(elementOrArray));
+  return flattened;
+}
+
+export function collect<T>(...things: T[]): T[] {
+  return things;
+}
+
+export function sum(numbers: number[]): number {
+  return numbers.reduce((count, number) => count + number, 0);
+}
+
+export function clamp(value: number, min: number, max: number): number {
+  return value < min ? min : value > max ? max : value;
+}
+
+export function unique<T>(things: T[]): T[] {
+  const uniqueThings = [];
+  things.forEach(thing => {
+    if (!contains(uniqueThings, thing)) uniqueThings.push(thing);
+  });
+  return uniqueThings;
+}

@@ -1,3 +1,8 @@
+export type Game = {
+  nodes: Node[];
+  transits: Transit[];
+};
+
 export type ObjectWithId = {
   id: string;
 };

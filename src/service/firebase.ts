@@ -19,7 +19,7 @@ const auth = firebase.auth();
 function mapDocToT<T extends ObjectWithId>(doc: firebase.firestore.DocumentSnapshot): T {
   return {
     id: doc.id,
-    ...doc.data,
+    ...doc.data(),
   } as T;
 }
 

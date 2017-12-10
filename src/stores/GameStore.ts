@@ -3,8 +3,8 @@ import { observable, action } from 'mobx';
 import { Transit, Node } from 'models';
 
 export class GameStore {
-  @observable nodes: Array<Node>;
-  @observable transits: Array<Transit>;
+  @observable nodes: Node[] = null;
+  @observable transits: Transit[] = null;
 
   constructor() {}
 

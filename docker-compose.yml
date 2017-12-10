@@ -1,5 +1,5 @@
 nginx:
-  container_name: graph-battles-nginx
+  container_name: ggj-2018-practice-nginx
   image: nginx
   ports:
     - 8081:80
