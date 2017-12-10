@@ -39,6 +39,10 @@ export class GameStore {
   }
 
   watchGame() {
+    this.gameRef.onSnapshot(snapshot => {
+      this.game = mapDocToT<Game>(snapshot);
+    });
+
     this.gameRef.collection('nodes').onSnapshot(snapshot => {
       this.nodes = snapshot.docs.map(doc => mapDocToT<Node>(doc));
     });
@@ -73,7 +77,7 @@ export class GameStore {
   }
 
   @action
-  tick(gameId: string) {
+  tick() {
     const currentTick = this.game.tick;
     const nextTick = currentTick + 1;
 
@@ -86,7 +90,7 @@ export class GameStore {
     });
 
     // Resolve ongoing transits
-    const resolvedTransits = this.ongoingTransits.filter(transit => transit.arrivalTime <= nextTick);
+    const resolvedTransits = this.ongoingTransits.filter(transit => transit.arrivalTick <= nextTick);
 
     resolvedTransits.forEach(transit => {
       const to = this.nodes.find(obj => obj.id == transit.to);
