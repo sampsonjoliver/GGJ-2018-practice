@@ -1,13 +1,13 @@
-import { autorun } from 'mobx';
-import * as Phaser from 'phaser-ce';
+import { autorun } from "mobx";
+import * as Phaser from "phaser-ce";
 
-import { GameStore } from 'stores/GameStore';
-import { PhaserStore } from 'stores/phaser';
-import { UiStore } from 'stores/ui';
-import { NODE_ASSET, NODE_SCALING, CIRCLE_ASSET, NODE_VISIBILITY_OVERLAY_ALPHA } from 'values';
+import { GameStore } from "stores/GameStore";
+import { PhaserStore } from "stores/phaser";
+import { UiStore } from "stores/ui";
+import { NODE_ASSET, NODE_SCALING, CIRCLE_ASSET, NODE_VISIBILITY_OVERLAY_ALPHA } from "values";
 
-import { Node } from 'models';
-import * as Utils from 'utils';
+import { Node } from "models";
+import * as Utils from "utils";
 
 export class NodeView {
   modelId: string;
@@ -86,7 +86,7 @@ export class NodeView {
       model.playerId && this.gameStore.players
         ? this.gameStore.players.find(player => player.id === model.playerId)
         : null;
-    const colour = player ? player.colour : 'aaaaaa';
+    const colour = player ? player.colour : "aaaaaa";
 
     this.spriteBackdrop.tint = Number.parseInt(colour, 16);
   }
