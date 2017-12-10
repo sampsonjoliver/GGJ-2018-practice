@@ -1,36 +1,24 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import { Node } from 'models';
+import Paper from 'material-ui/Paper';
+import Typography from 'material-ui/Typography';
+import Avatar from 'material-ui/Avatar';
 
-import { Avatar, Box, Card, Flex, Subhead } from 'rebass';
-
-const PlanetDetails = class PlanetDetails extends React.Component<any, any> {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      name: 'Unknown',
-      units: 10,
-      rate: 10,
-    };
-  }
-
-  render() {
-    return (
-      <Card width={256} height={150} m="auto">
-        <Flex>
-          <Box width={1 / 3} mx="auto">
-            <Avatar size={64} src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=2048&q=20" />
-          </Box>
-          <Box width={2 / 3}>
-            <Subhead>{this.state.planetName}</Subhead>
-            <div>Planet stats</div>
-            <div>Units: {this.state.units}</div>
-            <div>Rate: {this.state.rate}</div>
-          </Box>
-        </Flex>
-      </Card>
-    );
-  }
+type PlanetDetailProps = {
+  x: number;
+  y: number;
+  node: Node;
 };
+
+const PlanetDetails: React.StatelessComponent<PlanetDetailProps> = props => (
+  <Paper>
+    <Avatar src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=2048&q=20" />
+    <Typography>{props.node.id}</Typography>
+    <Typography>{props.node.playerId}</Typography>
+    <Typography>{props.node.rate}</Typography>
+    <Typography>{props.node.numUnits}</Typography>
+  </Paper>
+);
 
 export { PlanetDetails };
